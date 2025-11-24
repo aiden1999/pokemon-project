@@ -14,9 +14,7 @@ def load_data():
     # Get the directory where the current script is located
     script_dir = os.path.dirname(os.path.abspath(__file__))
     # Construct path to the CSV file relative to the script location
-    file_path = os.path.join(
-        os.path.dirname(script_dir), "data", "pokemon_v2.csv"
-    )
+    file_path = os.path.join(os.path.dirname(script_dir), "data", "pokemon_v2.csv")
     return pd.read_csv(file_path)
 
 
