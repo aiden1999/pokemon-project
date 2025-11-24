@@ -8,12 +8,12 @@ def main():
     # home_page = st.page("path/to/home_page.py", title="Home Page")
     # list pages here
     # ...
-    top_ranks = st.page(
+    home_page = st.Page("../src/pages/homepage.py", title="Home")
+    top_ranks = st.Page(
         "../src/pages/top_rank.py",
         title="Top Ranks",
-        icon="star",
     )
-    pages = st.navigation([top_ranks])
+    pages = st.navigation([home_page, top_ranks])
     pages.run()
     # pages = st.navigation([list, pages, here])
     # pages.run()
