@@ -16,8 +16,6 @@ def main():
     )
     pages = st.navigation([home_page, top_ranks])
     pages.run()
-    # pages = st.navigation([list, pages, here])
-    # pages.run()
 
 
 if __name__ == "__main__":
