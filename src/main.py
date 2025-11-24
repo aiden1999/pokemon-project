@@ -3,7 +3,7 @@ import streamlit as st
 
 def main():
     comparison_page = st.Page("pages/comparison/comparison.py", title="Comparison Page")
-    top_ranks = st.page(
+    top_ranks = st.Page(
         "../src/pages/top_rank.py",
         title="Top Ranks",
         icon="star",
