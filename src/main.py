@@ -8,10 +8,11 @@ def main():
     # home_page = st.page("path/to/home_page.py", title="Home Page")
     # list pages here
     # ...
-    home_page = st.Page("../src/pages/homepage.py", title="Home")
+    home_page = st.Page(
+        "../src/pages/homepage.py", title="Home", icon=":material/home:"
+    )
     top_ranks = st.Page(
-        "../src/pages/top_rank.py",
-        title="Top Ranks",
+        "../src/pages/top_rank.py", title="Top Ranks", icon=":material/trophy:"
     )
     pages = st.navigation([home_page, top_ranks])
     pages.run()
