@@ -3,9 +3,14 @@ import streamlit as st
 
 
 def main():
-    st.title("Pokemon data exploration")  # can change this
     df = pd.read_csv("./pokemon_v2.csv")
-    st.write("hello world")  # placeholder
+    # example:
+    # home_page = st.page("path/to/home_page.py", title="Home Page")
+    # list pages here
+    # ...
+
+    # pages = st.navigation([list, pages, here])
+    # pages.run()
 
 
 if __name__ == "__main__":
