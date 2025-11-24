@@ -75,7 +75,7 @@ with st.form("dashboard_form"):
 
     # first capture loop
     capture_prob1 = pn[pokemon_state] / (bn * 2)
-    submitted = st.form_submit_button("Submit")
+    submitted = st.form_submit_button("Catch the pokemon!")
 
     # second capture loop
     m = random.randint(1, 256)
@@ -103,7 +103,7 @@ colors = ["green", "red"]
 data = pd.DataFrame({"Outcome": outcomes, "Probability": values})
 
 
-# Plotly horizontal bar
+# Plotly horizontal bars
 fig = px.bar(
     data,
     x="Probability",
@@ -119,13 +119,15 @@ fig.update_layout(
     xaxis=dict(range=[0, 1], title="Probability"),
     yaxis=dict(title=""),
     height=200,
+    width=400,
 )
 fig.update_traces(texttemplate="%{text:.2%}", textposition="inside")
 
 
+# Images
 def info_card(pkm):
     st.write(f"{pkm['name']} (#{pkm['pokedex_number']})")
-    st.image(pkm["image_url"])
+    st.image(pkm["image_url"], width=150)
 
 
 if submitted:
@@ -134,10 +136,65 @@ if submitted:
     else:
         named_row = df.loc[df["name"] == name]
         pokemon_dict = named_row.iloc[0].to_dict()
-        pokemon_1 = info_card(pokemon_dict)
+        # pokemon_1 = info_card(pokemon_dict)
         # st.info(f"Estimated capture probability1: {capture_prob1:.2%}")
-        # st.info(f"Estimated capture probability2: {capture_prob2_est:.2%}")
-        st.info(f"You have {capture_prob_total:.2%} chance to catch {name}")
+
+        if 1 - (1 - capture_prob1) * (1 - capture_prob2) > 1:
+            st.success(f"You caught {name}!")
+        else:
+            st.error(f"O dear... {name} has escaped")
+        # st.info(f"Capture?: {1- (1-capture_prob1) * ( 1-capture_prob2)}")
+
+        # st.info(f"You have {capture_prob_total:.2%} chance to catch {name}")
         # st.progress(capture_prob_total)
         # st.image(pkm["image_url"])
+        # st.plotly_chart(fig, use_container_width=True)
+
+col1, col2 = st.columns([1, 4])
+if submitted:
+    with col1:
+        pokemon_1 = info_card(pokemon_dict)
+
+    with col2:
         st.plotly_chart(fig, use_container_width=True)
+
+
+# Prob to capture per throw
+throws = list(range(1, 11))
+probs = []
+cumulative = 0
+for k in throws:
+    prob = (1 - capture_prob_total) ** (k - 1) * capture_prob_total
+    cumulative += prob
+    probs.append(cumulative)
+
+
+data = pd.DataFrame({"Throw": throws, "Probability": probs})
+
+fig = px.bar(
+    data,
+    x="Throw",
+    y="Probability",
+    text="Probability",
+    labels={"Throw": "Throw Number", "Probability": "Chance of Capture"},
+    title="Capture probability per no. of throws",
+)
+
+# Format bar labels
+fig.update_traces(texttemplate="%{text:.2%}", textposition="outside")
+
+# Add a line trace on top of the bars
+fig.add_scatter(
+    x=data["Throw"],
+    y=data["Probability"],
+    mode="lines+markers",
+    name="Cumulative",
+    line=dict(color="red", width=2),
+    marker=dict(size=6),
+)
+
+# Adjust layout
+fig.update_layout(yaxis=dict(range=[0, max(probs) * 1.2]))
+
+if submitted:
+    st.plotly_chart(fig, use_container_width=True)
