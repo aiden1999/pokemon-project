@@ -8,7 +8,20 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 
 
-df = pd.read_csv("data/pokemon_v2.csv")
+# Load data
+@st.cache_data
+def load_data():
+    # Get the directory where the current script is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Construct path to the CSV file relative to the script location
+    file_path = os.path.join(
+        os.path.dirname(script_dir), "data", "pokemon_v2.csv"
+    )
+    return pd.read_csv(file_path)
+
+
+df = load_data()
+
 pokemon_names = df["name"].tolist()
 catch_rate = df["catch_rate"]
 
