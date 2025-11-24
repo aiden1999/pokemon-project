@@ -2,7 +2,7 @@ import streamlit as st
 
 
 class InfoCard:
-    def __init__(self, pkm) -> None:
+    def __init__(self, pkm, compare_pkm=None) -> None:
         st.subheader(f"{pkm["name"]} (#{pkm["pokedex_number"]})")
         st.image(pkm["image_url"])
         st.write(pkm["species"])
@@ -37,13 +37,31 @@ class InfoCard:
 
         st.divider()
 
-        st.write(f"HP: {pkm["hp"]}")
-        st.write(f"Attack: {pkm["attack"]}")
-        st.write(f"Defense: {pkm["defense"]}")
-        st.write(f"Special Attack: {pkm["sp_attack"]}")
-        st.write(f"Special Defense: {pkm["sp_defense"]}")
-        st.write(f"Speed: {pkm["speed"]}")
-        st.write(f"Total: {pkm["total_points"]}")
+        battle_stats = [
+            "hp",
+            "attack",
+            "defense",
+            "sp_attack",
+            "sp_defense",
+            "speed",
+            "total_points",
+        ]
+        for stat in battle_stats:
+            if stat == "hp":
+                stat_name = "HP"
+            elif stat == "total_points":
+                stat_name = "Total Points"
+            else:
+                stat_name = stat.replace("sp_", "Special ").title()
+            if compare_pkm:
+                if pkm[stat] > compare_pkm[stat]:
+                    st.markdown(f"{stat_name}: :green[{pkm[stat]}]")
+                elif pkm[stat] < compare_pkm[stat]:
+                    st.markdown(f"{stat_name}: :red[{pkm[stat]}]")
+                else:
+                    st.write(f"{stat_name}: {pkm[stat]}")
+            else:
+                st.write(f"{stat_name}: {pkm[stat]}")
 
         st.divider()
 
