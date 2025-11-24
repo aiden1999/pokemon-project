@@ -13,8 +13,10 @@ def main():
         title="Top Ranks",
         icon="⭐",
     )
-    
-    pages = st.navigation([top_ranks, comparison_page])
+    capture_other_pokemon = st.Page(
+        "../src/pages/capture_other_pokemon.py", title="Catch a pokemon!"
+    )
+    pages = st.navigation([home_page, top_ranks, comparison_page, capture_other_pokemon])
     pages.run()
 
 
