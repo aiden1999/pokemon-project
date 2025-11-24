@@ -6,7 +6,7 @@ def main():
     # home_page = st.page("path/to/home_page.py", title="Home Page")
     # list pages here
     # ...
-    comparison_page = st.Page("comparison/comparison.py", title="Comparison Page")
+    comparison_page = st.Page("pages/comparison/comparison.py", title="Comparison Page")
 
     pages = st.navigation([comparison_page])
     pages.run()
