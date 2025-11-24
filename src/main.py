@@ -2,6 +2,9 @@ import streamlit as st
 
 
 def main():
+    home_page = st.Page(
+        "../src/pages/homepage.py", title="Home", icon=":material/home:"
+    
     comparison_page = st.Page(
         "pages/comparison/comparison.py", title="Comparison Page", icon="⚖️"
     )
@@ -10,6 +13,7 @@ def main():
         title="Top Ranks",
         icon="⭐",
     )
+    
     pages = st.navigation([top_ranks, comparison_page])
     pages.run()
 

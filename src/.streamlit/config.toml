@@ -1,0 +1,36 @@
+ [theme]
+
+    # Primary color for interactive elements (buttons, sliders, etc.)
+    primaryColor = "#EF5350"
+    # Main background color
+    backgroundColor = "#FFFFFF"
+    # Background color for sidebar and containers
+    secondaryBackgroundColor = "#F0F2F6"
+    # Text color
+    textColor = "#262730"
+    # Font family
+    font = "sans serif"
+
+    # Pokemon accent colors
+    
+ [theme.colors]
+    blue = "#3B4CCA"
+    # Yellow from Pokémon logo
+    yellow = "#FFDE00"
+
+    ## New in Streamlit 1.44+ ##
+
+    # Controls the color of hyperlinks and clickable text elements
+    linkColor = "#4ECDC4"
+    # Sets the font family specifically for headings (h1, h2, h3, etc.)
+    headingFont = "sans serif"
+    # Controls font family for code blocks and inline code 
+    # (affects st.code and code snippets)
+    codeFont = "monospace"
+    # Sets the base font size in pixels for the entire app
+    baseFontSize = 14
+    # Controls the border radius (roundness) of UI elements
+    baseRadius = 0.5
+    # Controls whether widgets have visible borders 
+    # (affects input fields, select boxes, sliders, etc)
+    showWidgetBorder = true
