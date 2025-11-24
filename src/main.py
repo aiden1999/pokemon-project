@@ -1,16 +1,15 @@
-import pandas as pd
 import streamlit as st
 
 
 def main():
-    df = pd.read_csv("./pokemon_v2.csv")
     # example:
     # home_page = st.page("path/to/home_page.py", title="Home Page")
     # list pages here
     # ...
+    comparison_page = st.Page("comparison/comparison.py", title="Comparison Page")
 
-    # pages = st.navigation([list, pages, here])
-    # pages.run()
+    pages = st.navigation([comparison_page])
+    pages.run()
 
 
 if __name__ == "__main__":
